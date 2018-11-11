@@ -55,8 +55,8 @@ export class NodeService {
     }
 
     // 学生回答选择题
-    answerMultiple(course_id: string, mindmap_id: string, node_id: string, stuMultiple: StuMultiple): Observable<boolean> {
-        this.tempUrl = this.baseUrl + 'answer_multiple/' + course_id + '/' + mindmap_id + '/' + node_id;
+    answerMultiple(course_id: string, mindmap_id: string, node_id: string, user_name: string, stuMultiple: StuMultiple): Observable<boolean> {
+        this.tempUrl = this.baseUrl + 'answer_multiple/' + course_id + '/' + mindmap_id + '/' + node_id + '/' + user_name;
         return this.http.post<boolean>(this.tempUrl, stuMultiple, httpOptions);
     }
 
