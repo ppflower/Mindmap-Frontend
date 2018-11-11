@@ -1,0 +1,64 @@
+<app-header></app-header>
+
+<div class="alert alert-success" [hidden]="!success">
+  <button type="button" class="close" (click)="changeSuccess()">&times;</button>
+  <strong>添加成功!</strong>
+</div>
+
+<div class="alert alert-danger" [hidden]="!fail">
+  <button type="button" class="close" (click)="changeFail()">&times;</button>
+  <strong>课程ID已存在!</strong>
+</div>
+
+
+<div id="addCourse" class="buttonDiv">
+  <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#add" (click)="clearAlert()">添加课程</button>
+</div>
+
+<!-- 模态框 -->
+<div class="modal fade" id="add">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- 模态框头部 -->
+      <div class="modal-header">
+        <h4 class="modal-title">添加课程</h4>
+      </div>
+
+      <!-- 模态框主体 -->
+      <div class="modal-body">
+        <form>
+          <div class="formItem">
+            <label>课程id：</label>
+            <input type="text" required name="courseID" [(ngModel)]="course.course_id" #courseID="ngModel">
+          </div>
+
+          <div class="formItem" >
+            <label>课程名称：</label>
+            <input type="text" required name="courseName" [(ngModel)]="course.course_name" #courseName="ngModel">
+          </div>
+        </form>
+      </div>
+
+      <!-- 模态框底部 -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="onSubmit()"
+                [disabled]="(!courseID.valid) || (!courseName.valid)" data-dismiss="modal">确认</button>
+        <button type="button" class="btn btn-outline-dark" data-dismiss="modal">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="courses">
+  <div *ngFor="let course of courses" class="course">
+    <div class="courseName">{{course.course_id}}: <b>{{course.course_name}}</b></div>
+    <div class="studentNumber">课程人数：{{course.course_number}}</div>
+    <button type="button" class="btn btn-light" (click)="enterCourse(course.course_id)">进入课程</button>
+  </div>
+</div>
+
+
+
+

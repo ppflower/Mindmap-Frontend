@@ -1,0 +1,46 @@
+.buttonDiv {
+  float: left;
+  margin-top: 20px;
+  margin-right: 10px;
+  margin-bottom: 20px;
+}
+
+.item {
+  margin-bottom: 10px;
+}
+
+.title {
+  font-size: larger;
+}
+
+#homework {
+  clear: both;
+}
+
+li {
+  margin-top: 20px;
+}
+
+.formItem {
+  margin: 10px;
+}
+
+.prompt {
+  margin-left: 20px;
+  font-size: smaller;
+  color: sienna;
+}
+
+.modal-footer {
+  clear: both;
+}
+
+label {
+  width: 100px;
+  text-align: right;
+}
+
+.alert {
+  margin-top: 10px;
+}
+

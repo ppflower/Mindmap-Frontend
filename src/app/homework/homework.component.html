@@ -1,0 +1,171 @@
+<div class="alert alert-success" [hidden]="!success">
+  <button type="button" class="close" (click)="changeSuccess()">&times;</button>
+  <strong>发布成功!</strong>
+</div>
+
+<div class="alert alert-danger" [hidden]="!fail">
+  <button type="button" class="close" (click)="changeFail()">&times;</button>
+  <strong>发布失败!</strong>
+</div>
+
+<!-- 发布选择题 -->
+<div id="release_multiple" class="buttonDiv">
+  <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#releaseMultiple" (click)="clearAlert()">发布选择题</button>
+</div>
+
+<!-- 模态框 -->
+<div class="modal fade" id="releaseMultiple">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- 模态框头部 -->
+      <div class="modal-header">
+        <h4 class="modal-title">发布选择题</h4>
+      </div>
+
+      <!-- 模态框主体 -->
+      <div class="modal-body">
+        <form>
+          <div class="formItem">
+            <label>问题标题：</label>
+            <input size="30" type="text" required name="mtitle" [(ngModel)]="multiple.title" #mtitle="ngModel">
+          </div>
+
+          <div class="formItem" >
+            <label>选项A：</label>
+            <input size="30" type="text" required name="optionA" [(ngModel)]="multiple.optionA" #optionA="ngModel">
+          </div>
+
+          <div class="formItem" >
+            <label>选项B：</label>
+            <input size="30" type="text" required name="optionB" [(ngModel)]="multiple.optionB" #optionB="ngModel">
+          </div>
+
+          <div class="formItem" >
+            <label>选项C：</label>
+            <input size="30" type="text" required name="optionC" [(ngModel)]="multiple.optionC" #optionC="ngModel">
+          </div>
+
+          <div class="formItem" >
+            <label>选项D：</label>
+            <input size="30" type="text" required name="optionD" [(ngModel)]="multiple.optionD" #optionD="ngModel">
+          </div>
+
+          <div class="formItem" id="correct_answer">
+            <label>正确答案：</label>
+            <input type="radio" required name="mcorrect_answer" value="A" [(ngModel)]="multiple.correct_answer" #mcorrect_answer="ngModel"> A
+            <input type="radio" required name="mcorrect_answer" value="B" [(ngModel)]="multiple.correct_answer" #mcorrect_answer="ngModel"> B
+            <input type="radio" required name="mcorrect_answer" value="C" [(ngModel)]="multiple.correct_answer" #mcorrect_answer="ngModel"> C
+            <input type="radio" required name="mcorrect_answer" value="D" [(ngModel)]="multiple.correct_answer" #mcorrect_answer="ngModel"> D
+          </div>
+        </form>
+      </div>
+
+      <!-- 模态框底部 -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="releaseMultiple()"
+                [disabled]="(!mtitle.valid) || (!optionA.valid) || (!optionB.valid)|| (!optionC.valid) || (!optionD.valid) || (!mcorrect_answer.valid)" data-dismiss="modal">确认</button>
+        <button type="button" class="btn btn-outline-dark" data-dismiss="modal">关闭</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<!-- 发布简答题 -->
+<div id="release_short" class="buttonDiv">
+<button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#releaseShort" (click)="clearAlert()">发布简答题</button>
+</div>
+
+<!-- 模态框 -->
+<div class="modal fade" id="releaseShort">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- 模态框头部 -->
+      <div class="modal-header">
+        <h4 class="modal-title">发布简答题</h4>
+      </div>
+
+      <!-- 模态框主体 -->
+      <div class="modal-body">
+        <form>
+          <div class="formItem">
+            <label>问题标题：</label>
+            <input size="50" type="text" required name="stitle" [(ngModel)]="short.title" #stitle="ngModel">
+          </div>
+
+          <div class="formItem">
+            <label>正确答案：</label>
+            <input size="50" type="text" required name="scorrect_answer" [(ngModel)]="short.correct_answer" #scorrect_answer="ngModel">
+          </div>
+        </form>
+      </div>
+
+      <!-- 模态框底部 -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="releaseShort()"
+                [disabled]="(!stitle.valid) || (!scorrect_answer.valid)" data-dismiss="modal">确认</button>
+        <button type="button" class="btn btn-outline-dark" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 展示作业(选择题&简答题) -->
+<div id="homework">
+<ngb-accordion #acc="ngbAccordion" activeIds="static-1, static-2">
+  <ngb-panel title="选择题" id="static-1">
+    <ng-template ngbPanelContent>
+      <ol>
+        <li *ngFor="let multiple of multipleQuestion" class="multiple">
+          <div class="title, item"><b>{{multiple.title}}</b></div>
+          <div class="options, item">
+            <div>
+              <span>A. </span><span class="optionA"> {{multiple.optionA}}</span>
+            </div>
+            <div>
+              <span>B. </span><span class="optionB"> {{multiple.optionB}}</span>
+            </div>
+            <div>
+              <span>C. </span><span class="optionC"> {{multiple.optionC}}</span>
+            </div>
+            <div>
+              <span>D. </span><span class="optionD"> {{multiple.optionD}}</span>
+            </div>
+          </div>
+          <div class="correct_answer, item">
+            <span><b>正确答案：</b></span>
+            <span>{{multiple.correct_answer}}</span>
+          </div>
+          <div class="number, item">
+            <span><b>正确率：</b></span>
+            <span class="correct_number">{{multiple.correct_number}}</span>
+            <span> / </span>
+            <span class="number">{{multiple.number}}</span>
+          </div>
+          <hr>
+        </li>
+      </ol>
+    </ng-template>
+  </ngb-panel>
+
+
+  <ngb-panel title="简答题" id="static-2">
+    <ng-template ngbPanelContent>
+      <ol>
+        <li *ngFor="let short of shortQuestion" class="short">
+          <div class="title, item"><b>{{short.title}}</b></div>
+          <div class="correct_answer, item">
+            <span><b>正确答案：</b></span>
+            <span>{{short.correct_answer}}</span>
+          </div>
+          <hr>
+        </li>
+      </ol>
+    </ng-template>
+  </ngb-panel>
+</ngb-accordion>
+</div>

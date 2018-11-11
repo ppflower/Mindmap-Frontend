@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiUrl: 'http://localhost:8899/'
+  // apiUrl: 'http://52.83.171.185:8899/mindmap/'
 };
 
 /*

@@ -1,0 +1,68 @@
+<!--<ng-template #register let-c="close" let-d="dismiss">-->
+  <div class="modal-header">
+    <h4 class="modal-title">注册</h4>
+    <!--<button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">-->
+      <!--<span aria-hidden="true">&times;</span>-->
+    <!--</button>-->
+  </div>
+
+  <div class="modal-body">
+    <form #registerForm="ngForm">
+      <div [hidden]="next">
+        <div class="formItem">
+          <label>用户名：</label>
+          <input type="text" required name="userName" [(ngModel)]="user.user_name" #username="ngModel">
+          <span [hidden]="username.valid || username.pristine" class="prompt">请您输入用户名</span>
+        </div>
+
+        <div class="formItem" >
+          <label>密码：</label>
+          <input type="password" required name="userPsd" [(ngModel)]="user.user_pwd" #userpsd="ngModel">
+          <span [hidden]="userpsd.valid || userpsd.pristine"  class="prompt">请您输入密码</span>
+        </div>
+
+        <div class="formItem">
+          <label>密码确认：</label>
+          <input type="password" required name="confirmedPsd" [(ngModel)]="confirmedPsd" #confirmedpsd="ngModel">
+          <span [hidden]="userpsd.value == confirmedpsd.value || userpsd.untouched" class="prompt">密码不一致</span>
+        </div>
+
+        <div class="formItem" id="character">
+          <input type="radio" required name="identity" value="teacher" [(ngModel)]="user.identity" #id="ngModel"> 教师
+          <input type="radio" required name="identity" value="student" [(ngModel)]="user.identity" #id="ngModel"> 学生
+        </div>
+      </div>
+
+      <div [hidden]="!next">
+        <div class="formItem" >
+          <label>输入邮箱：</label>
+          <input type="email" required name="email" [(ngModel)]="user.email" #email="ngModel">
+          <button [hidden]="isChecking" type="button" class="sendCode" (click)="sendCode()"
+                  [disabled]="(!email.valid) || isChecking">发送验证码</button>
+          <span [hidden]="!isChecking" class="prompt">信息正在校验中，请稍后</span>
+        </div>
+
+        <!--<div class="formItem">-->
+
+        <!--</div>-->
+
+        <div class="formItem">
+          <label>输入验证码：</label>
+          <input type="text" required name="code" [(ngModel)]="user.code" #code="ngModel">
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+  <div class="modal-footer">
+    <button [hidden]="next" type="button" class="btn btn-outline-dark" (click)="goToNext()"
+            [disabled]="(!username.valid) || (!userpsd.valid) || (!confirmedpsd.valid) ||
+          (!id.valid) || (userpsd.value != confirmedpsd.value)">下一步</button>
+    <button [hidden]="!next" type="button" class="btn btn-outline-dark" (click)="goBack()"
+            >上一步</button>
+    <button [hidden]="!next" type="button" class="btn btn-outline-dark" (click)="onSubmit()"
+      [disabled]="(!email.valid) || (!code.valid)">提交</button>
+    <button type="button" class="btn btn-outline-dark" (click)="closeWindow()">取消</button>
+  </div>
+<!--</ng-template>-->
