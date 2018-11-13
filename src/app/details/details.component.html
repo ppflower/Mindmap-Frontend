@@ -37,6 +37,14 @@
                 <button class="btn btn-outline-secondary" (click)="open(content)">创建思维导图</button>
             </div>
 
+            <div ngbDropdown class="d-inline-block mr-2" style="margin-top: 10px;">
+                <button class="btn btn-outline-secondary" ngbDropdownToggle>选课学生列表</button>
+                <div ngbDropdownMenu>
+                    <button *ngFor="let student of studentList" class="dropdown-item"> {{student.name}} </button>
+
+                </div>
+            </div>
+
             <app-mindmap *ngIf="currentMind"
                          [mindId]="currentMind.id"
                          [courseId]="course_id"
